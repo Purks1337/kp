@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Реклама в поиске для ресторанов МАМА</title>
+    <title>Реклама в поиске для ресторанов МАМА — Улучшенная версия</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- 1. ОБЩИЕ СТИЛИ И СБРОС --- */
@@ -670,21 +670,26 @@
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .price-card {
             background: var(--color-bg-light);
             border-radius: 20px;
             padding: var(--spacing-xl);
+            width: 100%;
             max-width: 450px; 
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
-            flex: 1 1 350px; /* Адаптивность карточек */
+            flex: 1 1 350px;
             display: flex;
             flex-direction: column;
-            min-height: 500px; /* Чтобы кнопки были на одном уровне */
+            min-height: 500px;
             transition: var(--transition-base);
+            margin: 0 auto;
         }
         
         .price-card::before {
@@ -717,9 +722,12 @@
         
         .price-features {
             text-align: left;
-            margin-bottom: auto; /* Заставляет список занять все доступное пространство, толкая кнопку вниз */
+            margin-bottom: auto;
             padding-bottom: var(--spacing-md);
             list-style: none;
+            width: 100%;
+            overflow-y: auto;
+            max-height: 400px;
         }
         
         .price-features li {
@@ -729,6 +737,8 @@
             display: flex;
             align-items: flex-start;
             transition: var(--transition-base);
+            width: 100%;
+            word-break: break-word;
         }
          .price-features li:hover {
             transform: translateX(5px);
@@ -1022,8 +1032,8 @@
                 grid-template-columns: 1fr;
                 gap: var(--spacing-md);
             }
-            .pricing-cards { flex-direction: column; }
-            .price-card { min-height: auto; }
+            .pricing-cards { flex-direction: column; align-items: center; }
+            .price-card { width: 100%; max-width: 100%; min-height: auto; margin-bottom: var(--spacing-md); }
 
             /* Навигация */
             .dot-navigation {
@@ -1150,7 +1160,7 @@
                     Мы проверили запрос «Ресторан Екатеринбург» — Ваших карточек нет даже в обычных результатах
                 </p>
                 <div class="video-wrapper animatable">
-                    <iframe src="https://kinescope.io/embed/cAggAVgwAZ22dP8mLQryfy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" allowfullscreen></iframe>
+                    <iframe src="https://kinescope.io/embed/cAggAVgwAZ22dP8mLQryfy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock" allowfullscreen></iframe>
                 </div>
                 <p class="video-caption animatable">
                     * Видео показывает реальные результаты поиска по запросу «Ресторан Екатеринбург»
