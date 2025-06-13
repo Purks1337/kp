@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Реклама в поиске для ресторанов МАМА</title>
+    <title>Реклама в поиске для ресторанов МАМА — Улучшенная версия</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* --- 1. ОБЩИЕ СТИЛИ И СБРОС --- */
+        :root {
+            /* Определяем переменные для удобства, используя существующую палитру */
+            --color-text: #333;
+            --color-text-secondary: #666;
+            --color-text-dark: #000;
+            --color-bg-light: #fff;
+            --color-bg-grey: #f8f9fa;
+            --color-primary: #ed038b;
+            --color-primary-hover: #ff004c;
+            --color-accent: #ff6b6b;
+            --color-accent-light: #fff5f5;
+            
+            /* Типографика */
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --font-size-base: 16px;
+            --line-height-base: 1.6;
+            
+            /* Тени и эффекты */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition-base: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* Отступы */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 4rem;
+        }                                                                                                                                                                                                                                                                                                   
+
         * {
             margin: 0;
             padding: 0;
@@ -12,51 +45,165 @@
         }
         
         html { 
-            scroll-behavior: smooth; 
+            font-size: var(--font-size-base);
+            scroll-behavior: smooth;
+            scroll-padding-top: 2rem;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-base);
+            color: var(--color-text);
+            background: var(--color-bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        /* Базовые стили для параграфов */
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Стили для параграфов в hero секции */
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .hero p + p {
+            margin-top: 2px; /* Расстояние 2px между двумя параграфами */
+        }
+
+        /* Стили для кнопки CTA в hero секции */
+        .hero .cta-button {
+            margin-top: var(--spacing-xl); /* Нормальное расстояние от кнопки */
+        }
+
+        /* Центрированные параграфы с ограниченной шириной */
+        .video-section .video-subtitle,
+        .gallery .gallery-subtitle,
+        .examples .examples-intro,
+        .pricing .pricing-intro,
+        .footer-cta .footer-cta-description {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* Стили для поисковых запросов в тексте */
+        .search-query-inline {
+            display: inline-flex;
+            align-items: center;
+            background: #f0f0f0;
+            padding: 0.2em 0.8em;
+            border-radius: 20px;
+            margin: 0 0.2em;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            color: var(--color-text);
+        }
+
+        .search-query-inline i {
+            font-size: 0.9em;
+            margin-right: 0.3em;
+            color: #d0d0d0;
+        }
+
+        /* Параграфы с описанием проблемы */
+        .problem-text .problem-description,
+        .problem-text .problem-details {
+            max-width: 100%;
+            text-align: left;
+        }
+
+        /* Параграфы в примерах объявлений */
+        .ad-description {
+            max-width: none;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Параграфы в карточках цен */
+        .price-features li {
+            max-width: none;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Параграфы в контактной информации */
+        .contact-info p {
+            max-width: none;
+            text-align: left;
+            margin: 0;
+        }
+
+        .contact-closing {
+            max-width: none;
+            text-align: center;
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Параграфы в сравнении цен */
+        .pricing .pricing-comparison {
+            max-width: 100%;
+            text-align: center;
+        }
+
+        /* Параграфы в примерах */
+        .examples .examples-outro {
+            max-width: 100%;
+            text-align: center;
+        }
+        
+        /* --- 2. СТРУКТУРА ПРЕЗЕНТАЦИИ (СЛАЙДЫ) --- */
         #fullpage-presentation {
             height: 100vh;
             overflow-y: scroll; 
             overflow-x: hidden;
-            scroll-snap-type: y mandatory; 
+            scroll-snap-type: y proximity; 
+            scroll-behavior: smooth;
         }
         
         .slide {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             scroll-snap-align: start; 
-            display: flex; 
-            flex-direction: column;
+            display: flex; /* Используем Flex для центрирования контента */
             justify-content: center; 
             align-items: center;
             position: relative; 
             overflow: hidden; 
-            padding: 40px 0; 
+            padding: var(--spacing-xl) var(--spacing-md);
         }
 
         .slide .container {
             max-width: 1200px;
             width: 100%; 
             margin: 0 auto;
-            padding: 0 20px;
-            /* На десктопе по умолчанию не скроллим, если только не очень много контента */
-            /* overflow-y: auto; /* Потенциально можно включить и для десктопа, если нужно */
-            /* max-height: calc(100vh - 80px); /* 40px*2 padding слайда */
+            text-align: center; /* Центрируем текст в контейнере по умолчанию */
+            padding: 0 var(--spacing-sm);
         }
         
+        /* --- 3. СТИЛИЗАЦИЯ СЕКЦИЙ --- */
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-            color: white;
-            text-align: center;
+            background: var(--color-bg-light);
+            position: relative;
         }
         
         .hero::before {
@@ -65,317 +212,479 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 20s ease-in-out infinite;
-            z-index: 0; 
-        }
-        .hero .container { 
-            position: relative;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.95) 100%);
             z-index: 1;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero svg {
+            width: 180px;
+            height: auto;
+            margin-bottom: var(--spacing-lg);
+            filter: drop-shadow(var(--shadow-sm));
         }
         
         .hero h1 {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: clamp(2.5rem, 5vw, 3.2rem);
+            margin-bottom: 0.5em;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            width: 100%;
         }
         
         .hero h2 {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            width: 100%;
         }
         
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
+        /* CTA Button (Кнопка призыва к действию) */
         .cta-button {
-            background: white;
-            color: #ff6b6b;
-            padding: 18px 40px;
+            background: var(--color-primary);
+            color: var(--color-bg-light);
+            padding: 1rem 2.5rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             text-decoration: none;
             display: inline-block;
+            transition: var(--transition-base);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
         
         .cta-button:hover {
+            background: var(--color-primary-hover);
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-lg);
         }
         
-        /* Problem Section */
+        .cta-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .cta-button:focus, .cta-button:focus-visible {
+            outline: 3px solid var(--color-primary-hover); /* Улучшение для доступности */
+            outline-offset: 3px;
+        }
+        
+        /* Problem Section (Секция с проблемой) */
         .problem {
-            background: #f8f9fa;
+            background: var(--color-bg-grey);
         }
         
         .problem-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
             align-items: center;
             width: 100%; 
+            text-align: left; /* Текст в этой секции лучше выровнять по левому краю */
         }
         
         .problem-text h2 {
-            font-size: 2.5em;
-            color: #ff6b6b;
-            margin-bottom: 30px;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
         }
-        /* Убираем инлайновые стили из HTML и задаем здесь */
-        .problem-text p.problem-description { 
-            font-size: 1.2em; 
-            line-height: 1.6; 
-            margin-bottom: 30px;
+        
+        .problem-text .problem-description {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            margin-bottom: var(--spacing-lg);
         }
-        .problem-text p.problem-details {
-            font-size: 1.1em; 
-            color: #666;
+        .problem-text .problem-details {
+            font-size: 1rem; 
+            color: var(--color-text-secondary);
         }
         
         .problem-stats {
-            background: white;
-            padding: 40px;
+            background: var(--color-bg-light);
+            padding: var(--spacing-lg);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-base);
+        }
+        
+        .problem-stats:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         .stat-item {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            border-left: 4px solid #ff6b6b;
-            background: #fff5f5;
+            /* gap: var(--spacing-xl); */ /* Удаляем gap, так как используем margin-right для числа */
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-left: 5px solid var(--color-accent);
+            background: var(--color-accent-light);
+            border-radius: 12px;
+            transition: var(--transition-base);
+        }
+        .stat-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
         }
         .stat-item:last-child {
             margin-bottom: 0;
         }
         
         .stat-number {
-            font-size: 3em;
-            font-weight: bold;
-            color: #ff6b6b;
-            margin-right: 25px;
+            font-size: clamp(2.5rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-right: var(--spacing-xl); /* Добавляем большой отступ справа */
+            min-width: 110px; /* Возвращаем к исходному min-width */
+            text-align: center;
         }
         
         .stat-text {
-            font-size: 1.1em;
+            font-size: clamp(1rem, 2vw, 1.1rem);
             line-height: 1.4;
         }
         
         /* Video Section */
-        .video-section {
-            text-align: center;
-            background: #fff;
-        }
-        
         .video-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .video-section p.video-subtitle { /* Убираем инлайновый стиль */
-            font-size: 1.2em; 
-            margin-bottom: 20px;
-        }
-        .video-section p.video-caption { /* Убираем инлайновый стиль */
-             color: #666; font-style: italic;
-        }
-
-        .video-placeholder {
-            background: #000;
-            width: 80%;
-            max-width: 800px;
-            aspect-ratio: 16 / 9; 
-            margin: 20px auto; 
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5em;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .play-button {
-            width: 80px;
-            height: 80px;
-            background: #ff6b6b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .play-button:hover {
-            transform: scale(1.1);
-        }
-        
-        .play-button::after {
-            content: '▶';
-            color: white;
-            font-size: 2em;
-            margin-left: 5px;
-        }
-        
-        /* Examples Section */
-        .examples {
-            background: #f8f9fa;
-        }
-        .examples p.examples-intro { /* Убираем инлайновый стиль */
-            text-align: center; 
-            font-size: 1.2em; 
-            margin-bottom: 40px;
-        }
-        .examples p.examples-outro { /* Убираем инлайновый стиль */
-            text-align: center; 
-            font-size: 1.1em; 
-            color: #666; 
-            margin-top: 30px;
-        }
-
-        .examples h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.5em;
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px; 
-            color: #333;
+            width: 100%;
+        }
+        .video-section .video-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xl);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto var(--spacing-lg) auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-base);
+        }
+
+        .video-wrapper::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-section .video-caption {
+            color: var(--color-text-secondary);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+            margin-top: var(--spacing-md);
+        }
+
+        /* Gallery Section (Галереи) */
+        .gallery {
+            background: var(--color-bg-grey);
+        }
+        
+        .gallery h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.5em;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .gallery .gallery-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            margin-bottom: var(--spacing-xl);
+            color: var(--color-text-secondary);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            gap: var(--spacing-md);
+            width: 100%;
+        }
+        
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-base);
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 16/9; /* Добавляем соотношение сторон для изображений */
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+            opacity: 0;
+            transition: var(--transition-base);
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-base);
+        }
+        
+        /* Специфичные стили для разных галерей */
+        #slide-gallery .gallery-grid {
+            grid-template-columns: 1fr;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        #slide-gallery-2 .gallery-grid {
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Examples Section (Примеры объявлений) */
+        .examples {
+            background: var(--color-bg-grey);
+        }
+        .examples h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            width: 100%;
+        }
+        .examples .examples-intro { 
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xl);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .search-query {
+            background: var(--color-accent);
+            color: var(--color-bg-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 auto var(--spacing-lg) auto;
+            max-width: fit-content;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .search-query i {
+            font-size: 1rem;
         }
         
         .ad-example {
-            background: white;
-            border-radius: 15px;
-            padding: 20px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 5px solid #ff6b6b;
+            background: var(--color-bg-light);
+            border-radius: 12px;
+            padding: var(--spacing-md); 
+            margin: 0 auto var(--spacing-md) auto; 
+            max-width: 700px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--color-accent);
+            text-align: left;
+            transition: var(--transition-base);
         }
-        
+        .ad-example:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
         .ad-title {
             color: #1a0dab;
-            font-size: 1.2em; 
+            font-size: 1.25rem; 
             font-weight: 500;
             margin-bottom: 5px;
-            text-decoration: underline;
+            text-decoration: none; /* Убираем подчеркивание по умолчанию */
+            transition: var(--transition-base);
+        }
+        .ad-title:hover {
+            color: var(--color-primary);
+            text-decoration: underline; /* Добавляем при наведении */
         }
         
         .ad-url {
             color: #006621;
-            font-size: 0.85em;
-            margin-bottom: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
         }
         
         .ad-description {
             color: #545454;
-            line-height: 1.3; 
-            font-size: 0.95em;
+            font-size: 1rem;
+            max-width: none; /* Снимаем ограничение 65ch для этого элемента */
         }
         
-        .search-query {
-            background: #ff6b6b;
-            color: white;
-            padding: 10px 20px; 
-            border-radius: 25px;
-            font-weight: bold;
+        .examples .examples-outro {
+            font-size: 1.1rem; 
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-xl);
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.1em;
+            width: 100%;
         }
         
-        /* Benefits Section */
-        .benefits {
-            background: white;
-        }
-        
+        /* Benefits Section (Преимущества) */
         .benefits h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: var(--spacing-xl);
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px; 
-            color: #333;
+            width: 100%;
         }
         
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
         }
         
         .benefit-card {
-            text-align: center;
-            padding: 25px 15px; 
-            border-radius: 15px;
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
-            color: white;
-            transition: transform 0.3s ease;
+            padding: var(--spacing-lg) var(--spacing-md);
+            border-radius: 16px;
+            background: var(--color-bg-light);
+            color: var(--color-text-dark);
+            transition: var(--transition-base);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
         }
         
         .benefit-card:hover {
-            transform: translateY(-5px); 
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
         
         .benefit-icon {
-            font-size: 3em; 
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
         }
         
         .benefit-card h3 {
-            font-size: 1.3em; 
-            margin-bottom: 10px;
-        }
-        .benefit-card p {
-            font-size: 0.9em; 
+            font-size: 1.4rem;
+            margin-bottom: 0.75em;
         }
         
-        /* Pricing Section */
+        .benefit-card p {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin: 0 auto;
+        }
+        
+        /* Pricing Section (Цены) */
         .pricing {
-            background: #f8f9fa;
-            text-align: center;
+            background: var(--color-bg-grey);
         }
         
         .pricing h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #333;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.5em;
+            text-align: center;
+            width: 100%;
         }
-        .pricing p.pricing-intro { /* Убираем инлайновый стиль */
-            font-size: 1.2em; 
-            margin-bottom: 20px;
+        .pricing .pricing-intro {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            width: 100%;
         }
-         .pricing p.pricing-comparison { /* Убираем инлайновый стиль */
-            font-size: 1.1em; 
-            color: #666; 
-            margin-top: 30px;
+        
+        .pricing-cards {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
         }
         
         .price-card {
-            background: white;
+            background: var(--color-bg-light);
             border-radius: 20px;
-            padding: 30px 20px; 
+            padding: var(--spacing-xl);
             max-width: 450px; 
-            margin: 20px auto;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
+            flex: 1 1 350px; /* Адаптивность карточек */
+            display: flex;
+            flex-direction: column;
+            min-height: 500px; /* Чтобы кнопки были на одном уровне */
+            transition: var(--transition-base);
         }
         
         .price-card::before {
@@ -384,94 +693,157 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            height: 6px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+        }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         .price {
-            font-size: 3.5em; 
-            font-weight: bold;
-            color: #ff6b6b;
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            font-weight: 700;
+            color: var(--color-accent);
             margin-bottom: 5px;
         }
         
         .price-period {
-            font-size: 1.1em;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
         }
         
         .price-features {
             text-align: left;
-            margin-bottom: 20px;
-            list-style: none; /* Убрать стандартные маркеры, т.к. есть кастомные */
+            margin-bottom: auto; /* Заставляет список занять все доступное пространство, толкая кнопку вниз */
+            padding-bottom: var(--spacing-md);
+            list-style: none;
         }
         
         .price-features li {
-            padding: 8px 0; 
+            padding: var(--spacing-sm) 0; 
             border-bottom: 1px solid #eee;
-            font-size: 1em; 
+            font-size: 1rem; 
+            display: flex;
+            align-items: flex-start;
+            transition: var(--transition-base);
+        }
+         .price-features li:hover {
+            transform: translateX(5px);
+            color: var(--color-primary);
         }
          .price-features li:last-child {
             border-bottom: none;
         }
-        
-        .price-features li:before {
+         .price-features li::before {
             content: '✓';
-            color: #ff6b6b;
-            font-weight: bold;
-            margin-right: 10px;
+            color: var(--color-accent);
+            font-weight: 700;
+            margin-right: var(--spacing-sm);
+            font-size: 1.2em;
+            line-height: 1.2;
         }
-        .price-card p.price-note { /* Убираем инлайновый стиль */
-            color: #666; 
-            font-size: 0.9em; 
-            margin-bottom: 30px;
+        .price-card .price-note {
+            color: var(--color-text-secondary); 
+            font-size: 0.9rem; 
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
         }
         
-        /* Footer CTA */
-        .footer-cta {
-            background: linear-gradient(135deg, #333 0%, #555 100%);
-            color: white;
+        .pricing .pricing-comparison {
+            font-size: 1.1rem; 
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-xl);
             text-align: center;
+            width: 100%;
+        }
+        
+        /* Footer CTA (Финальный призыв) */
+        .footer-cta {
+            background: url('img/footer.jpg') center/cover no-repeat;
+            color: var(--color-bg-light);
+            position: relative;
+        }
+        
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.85) 100%);
+        }
+        
+        .footer-cta .container {
+            position: relative;
+            z-index: 1;
         }
         
         .footer-cta h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: clamp(2.2rem, 5vw, 2.8rem);
+            margin-bottom: 0.75em;
+            color: var(--color-bg-light);
+            text-align: center;
+            width: 100%;
         }
         
-        .footer-cta p.footer-cta-description {
-            font-size: 1.2em; 
-            margin-bottom: 30px;
-            max-width: 550px;
+        .footer-cta .footer-cta-description {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            text-align: center;
         }
         
         .contact-info {
             background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            max-width: 380px;
+            padding: var(--spacing-lg);
+            border-radius: 16px;
+            margin-top: var(--spacing-xl);
+            max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-base);
+            text-align: center;
         }
-        .contact-info p.contact-closing { /* Убираем инлайновый стиль */
-            font-size: 0.9em; 
-            margin-top: 15px;
+        .contact-info:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
         }
-
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-info strong {
+            font-size: 1.2rem;
+        }
+        .contact-info .contact-closing {
+            font-size: 1rem; 
+            margin-top: var(--spacing-sm);
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        /* --- 4. НАВИГАЦИЯ И ДОП. ЭЛЕМЕНТЫ --- */
 
         /* Dot Navigation */
         .dot-navigation {
             position: fixed;
-            right: 20px;
+            right: 25px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             z-index: 1000;
+            background: rgba(255,255,255,0.1);
+            padding: var(--spacing-sm);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
         }
 
         .dot-navigation a {
@@ -480,139 +852,234 @@
             background-color: rgba(0, 0, 0, 0.3);
             border-radius: 50%;
             margin: 8px 0;
-            transition: background-color 0.3s ease;
-            border: 2px solid white; 
+            transition: var(--transition-base);
+            border: 2px solid var(--color-bg-light);
+            box-shadow: var(--shadow-sm);
         }
 
         .dot-navigation a:hover {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: var(--color-accent);
+            transform: scale(1.2);
         }
 
         .dot-navigation a.active-dot {
-            background-color: #ff6b6b; 
+            background-color: var(--color-accent); 
+            transform: scale(1.4);
         }
         
+        /* Popup для изображений */
+        .image-popup {
+            display: none;
+            position: fixed;
+            inset: 0; /* top, right, bottom, left = 0 */
+            z-index: 2000;
+            backdrop-filter: blur(8px); /* Эффект размытия фона */
+        }
+        .popup-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+        }
+        .popup-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            margin: 5vh auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2001;
+        }
+        .popup-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+        .popup-close {
+            position: absolute;
+            top: 2vh;
+            right: 2vw;
+            color: #fff;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: var(--transition-base);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+        .popup-close:hover {
+            transform: scale(1.2);
+            background: rgba(255,255,255,0.2);
+        }
+        .popup-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition-base);
+            z-index: 2002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .popup-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .popup-prev { left: 2vw; }
+        .popup-next { right: 2vw; }
+        
+        /* Анимации появления элементов */
         .animatable {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .animatable.animated {
             opacity: 1;
             transform: translateY(0);
         }
+        /* Добавим задержки для красивого каскадного эффекта */
+        .animatable:nth-child(2) { transition-delay: 0.1s; }
+        .animatable:nth-child(3) { transition-delay: 0.2s; }
+        .animatable:nth-child(4) { transition-delay: 0.3s; }
+        .animatable:nth-child(5) { transition-delay: 0.4s; }
 
-        /* Mobile Responsive */
+
+        /* --- 5. АДАПТИВНОСТЬ (RESPONSIVE DESIGN) --- */
+        @media (max-width: 992px) {
+             /* Уменьшаем шрифты на средних экранах */
+            :root {
+                --spacing-xl: 3rem;
+                --spacing-lg: 2rem;
+                --spacing-md: 1.5rem;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+            .pricing-cards {
+                gap: var(--spacing-md);
+            }
+            .price-card {
+                flex-basis: 320px;
+            }
+            #slide-gallery-2 .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-md);
+            }
+        }
+
         @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 2.5rem;
+                --spacing-lg: 1.5rem;
+                --spacing-md: 1rem;
+            }
+
             .slide {
-                padding: 20px 0; /* Уменьшаем отступы слайда на мобильных */
+                padding: var(--spacing-lg) var(--spacing-sm);
+                align-items: flex-start; 
+                height: auto;
+                min-height: 100vh;
             }
             .slide .container {
-                padding: 0 15px; 
-                overflow-y: auto; /* !!! Включаем внутренний скролл для контейнера !!! */
-                max-height: calc(100vh - 40px); /* 20px сверху + 20px снизу от .slide */
-                /* Чтобы контент начинался сверху, если скроллится */
-                display: block; /* Убираем flex-центрирование для контейнера, если он скроллится */
+                padding-top: 60px; /* Отступ от верха, чтобы контент не прилипал */
+                padding-bottom: 60px;
             }
-
-            /* Hero Section */
-            .hero h1 { font-size: 2em; margin-bottom: 15px; } 
-            .hero h2 { font-size: 1.1em; margin-bottom: 20px; }
-            .hero p { font-size: 0.9em; margin-bottom: 25px;}
-            .hero .cta-button { padding: 15px 30px; font-size: 1em; }
-
-            /* Problem Section */
-            .problem-grid { grid-template-columns: 1fr; gap: 30px; }
-            .problem-text h2 { font-size: 1.8em; margin-bottom: 15px; }
-            .problem-text p.problem-description { font-size: 1em; margin-bottom: 15px; line-height: 1.5; }
-            .problem-text p.problem-details { font-size: 0.9em; }
+            #fullpage-presentation { scroll-snap-type: none; } /* Отключаем snap-scroll на мобильных для плавной прокрутки */
             
-            .problem-stats { padding: 20px; }
-            .stat-item { padding: 15px; margin-bottom: 15px; }
-            .stat-number { font-size: 2em; margin-right: 15px; }
-            .stat-text { font-size: 0.9em; line-height: 1.3; }
-            .stat-text br { display: none; } /* Чтобы текст был в одну строку если возможно */
-            .stat-text strong { display: block; margin-bottom: 3px; }
+            /* Типографика */
+            h1, .hero h1 { font-size: 2.2rem; }
+            h2, .hero h2 { font-size: 1.2rem; }
+            h2:not(.hero h2) { font-size: 1.8rem; }
+            .hero p, .problem-description, .video-subtitle, .examples-intro, .pricing-intro, .footer-cta-description { font-size: 1rem; }
 
+            /* Элементы */
+            .cta-button { padding: 14px 28px; font-size: 1rem; }
+            .problem-stats { padding: 25px; }
+            .stat-number { font-size: 2.2rem; }
+            .stat-text { font-size: 1rem; }
+            #slide-gallery-2 .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            .pricing-cards { flex-direction: column; }
+            .price-card { min-height: auto; }
 
-            /* Video Section */
-            .video-section h2 { font-size: 1.8em; margin-bottom: 10px; }
-            .video-section p.video-subtitle { font-size: 1em; margin-bottom: 15px; }
-            .video-placeholder { width: 90%; margin: 15px auto; }
-            .play-button { width: 60px; height: 60px;}
-            .play-button::after { font-size: 1.5em; }
-            .video-section p.video-caption { font-size: 0.85em; }
-
-            /* Examples Section */
-            .examples h2 { font-size: 1.8em; margin-bottom: 20px; }
-            .examples p.examples-intro { font-size: 1em; margin-bottom: 15px; }
-            .search-query { padding: 8px 15px; font-size: 1em; margin-bottom: 15px; }
-            .ad-example { padding: 15px; margin-bottom: 15px; }
-            .ad-title { font-size: 1.1em; }
-            .ad-description { font-size: 0.9em; }
-            .examples p.examples-outro { font-size: 0.9em; margin-top: 20px; }
-
-            /* Benefits Section - ОСОБОЕ ВНИМАНИЕ */
-            .benefits h2 {
-                margin-bottom: 20px; 
-                font-size: 1.8em; 
-            }
-            .benefits-grid {
-                grid-template-columns: 1fr; 
-                gap: 15px; 
-            }
-            .benefit-card {
-                padding: 20px 15px; 
-            }
-            .benefit-icon {
-                font-size: 2.2em; /* Уменьшаем иконку */
-                margin-bottom: 10px;
-            }
-            .benefit-card h3 {
-                font-size: 1.15em; /* Уменьшаем заголовок карточки */
-                margin-bottom: 8px;
-            }
-            .benefit-card p {
-                font-size: 0.85em; /* Уменьшаем текст в карточке */
-                line-height: 1.4;
-            }
-            
-            /* Pricing Section */
-            .pricing h2 { font-size: 1.8em; margin-bottom: 15px; }
-            .pricing p.pricing-intro { font-size: 1em; margin-bottom: 15px; }
-            .price-card { padding: 25px 15px; margin: 15px auto; max-width: 90%; }
-            .price { font-size: 2.8em; }
-            .price-period { font-size: 1em; margin-bottom: 15px; }
-            .price-features li { padding: 6px 0; font-size: 0.9em; }
-            .price-features { margin-bottom: 15px; }
-            .price-card p.price-note { font-size: 0.8em; margin-bottom: 20px; }
-            .price-card .cta-button { padding: 12px 25px; font-size: 1em; }
-            .pricing p.pricing-comparison { font-size: 0.9em; margin-top: 15px; }
-            .pricing p.pricing-comparison br { display: none; }
-
-
-            /* Footer CTA */
-            .footer-cta h2 { font-size: 1.8em; margin-bottom: 15px; }
-            .footer-cta p.footer-cta-description { font-size: 1em; margin-bottom: 20px; }
-            .footer-cta .cta-button { padding: 15px 30px; font-size: 1em; }
-            .contact-info { padding: 15px; margin-top: 15px; max-width: 90%;}
-            .contact-info p { font-size: 0.9em; } 
-            .contact-info p.contact-closing { font-size: 0.8em; margin-top: 10px;}
-            
+            /* Навигация */
             .dot-navigation {
-                right: 10px; 
-                bottom: 10px; /* Можно переместить вниз для лучшего доступа на мобильных */
+                right: auto; 
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 15px; 
                 top: auto;
-                transform: none;
-                flex-direction: row; /* Горизонтально */
+                flex-direction: row; 
+                background: rgba(0,0,0,0.1);
+                padding: 5px 10px;
+                border-radius: 20px;
             }
             .dot-navigation a {
                 width: 10px;
                 height: 10px;
-                margin: 0 6px; /* Горизонтальные отступы */
+                margin: 0 6px;
+                box-shadow: none;
+                border-color: transparent;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 16/9;
             }
         }
 
+        @media (max-width: 480px) {
+            :root {
+                --spacing-xl: 2rem;
+                --spacing-lg: 1.25rem;
+                --spacing-md: 0.75rem;
+            }
+
+            .slide {
+                padding: var(--spacing-md);
+            }
+
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .stat-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .stat-number {
+                margin-right: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+
+            .price-card {
+                padding: var(--spacing-lg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -624,10 +1091,12 @@
         <!-- Hero Section -->
         <section class="slide hero" id="slide-hero" data-slidename="hero">
             <div class="container">
-                <h1>Ваши клиенты ищут ВАС в интернете</h1>
-                <h2>Но находят КОНКУРЕНТОВ</h2>
-                <p>Каждый день жители Екатеринбурга делают тысячи запросов "ресторан", "бизнес ланч", "где поесть". Ваши 8 ресторанов МАМА должны быть первыми в результатах!</p>
-                <a href="#slide-contact" class="cta-button">Хочу быть первым в поиске!</a>
+                <svg class="animatable" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 203 82" class="h-logoFooterMobile w-logoFooterMobile lg:h-logoFooter lg:w-logoFooter"><path fill="url(#logo_svg__a)" d="m202.71 52.698-8.199-22.395c-.069-.186-.166-.352-.254-.524-3.18-8.052-5.849-16.24-9.37-24.348-1.47-3.16-4.64-5.12-8.074-3.998-3.512 1.148-4.478 4.933-5.662 8.024l-7.824 20.818c-1.879 4.17-2.363 8.554-5.208 8.318-2.322-.01-2.884-7.204-3.029-8.708a3130 3130 0 0 1-1.721-18.766c-.199-4.06-.939-8.528-5.493-9.902-2.803-.843-5.789.085-7.586 2.37-1.788 2.27-2.659 5.502-3.819 8.135-2.007 4.679-3.738 8.66-5.808 13.017-1.973-4.335-5.326-11.614-7.854-17.15-1.819-3.981-3.98-7.306-8.893-6.708-5.43.658-5.641 6.291-6.277 10.488-.871 7.85-1.771 16.389-2.743 24.268-.394 1.966-1.249 3.741-3.072 3.468-2.582-.39-3.787-6.497-4.624-8.58-3.386-8.42-6.109-17.246-9.933-25.474-1.468-3.162-4.64-5.12-8.072-3.998-3.514 1.147-4.479 4.933-5.663 8.024l-7.825 20.818c-1.878 4.17-2.362 8.553-5.207 8.318-2.321-.01-2.884-7.204-3.03-8.708a3036 3036 0 0 1-1.72-18.767c-.199-4.06-.94-8.528-5.493-9.901-2.802-.844-5.789.085-7.587 2.37-1.787 2.27-2.659 5.502-3.819 8.134-2.006 4.679-3.738 8.662-5.807 13.017-1.973-4.334-5.326-11.614-7.854-17.15C23.37 3.229 21.21-.096 16.296.5c-5.428.658-5.64 6.293-6.276 10.489C8.78 22.16 7.48 34.739 6.005 44.808c-.178 1.13-.213 2.441-1.057 3.302C2.705 50.39-.618 50.594.1 54.622c1.872 6.874 9.375 2.324 11.818-.433 1.522-1.718 2.443-3.919 2.89-6.343.83-4.513 3.146-25.086 3.937-32.744 2.608 5.868 4.157 9.19 6.198 13.702.945 2.086 1.737 4.544 3.467 6.089 2.955 2.47 7.476 2.118 9.97-.76.912-1.337 2.093-4.021 2.97-5.985 1.822-4.084 4.048-8.658 5.472-12.9 0 0 1.284 12.445 1.869 18.373.45 4.66 1.76 9.66 5.09 12.205 4.706 3.644 12.341 2.544 15.793-2.21 1.736-2.391 2.75-6.86 5.218-6.94l10.761.043c.782.002 1.167-.084 1.807.006l.612.003c2.47.098 3.517 4.576 5.273 6.98 1.75 2.4 4.55 3.887 7.496 4.316v.035a11.9 11.9 0 0 0 5.68-.694c.346-.104.72-.255 1.129-.48q.2-.116.395-.24c.056-.032.114-.058.169-.09v-.017c2.512-1.672 4.093-4.666 4.578-5.644.892-1.799 1.547-6.53 1.766-7.73s1.115-10.024 1.906-17.682c2.608 5.868 4.157 9.19 6.2 13.702.943 2.087 1.735 4.544 3.465 6.09 2.956 2.468 7.476 2.116 9.969-.761.912-1.337 2.094-4.02 2.971-5.985 1.821-4.084 4.047-8.658 5.472-12.9 0 0 1.285 12.445 1.869 18.374.45 4.66 1.76 9.66 5.091 12.204 4.705 3.644 12.34 2.544 15.792-2.21 1.736-2.391 2.75-6.86 5.218-6.94l10.761.043c.784.003 1.167-.083 1.808.007l.611.002c.712.029 1.303.427 1.829 1.029l6.497 17.743c.894 2.444 3.588 3.713 6.017 2.834 2.427-.88 3.671-3.572 2.777-6.016M86.236 27.843l-10.045-.04c1.115-3.002 5.025-14.134 5.025-14.134s3.604 10.365 5.02 14.174m97.619.38-10.045-.04c1.116-3.001 5.026-14.134 5.026-14.134s3.604 10.366 5.019 14.174"></path><path fill="#2B292D" d="M43.347 72.347c-1.582 0-2.726.624-3.26 1.855h-.057v-1.855h-1.389v9.34h1.428v-4.454c0-2.235 1.277-3.468 3.221-3.468h1.715v-1.418zm10.236-.246c-2.879 0-4.859 2.216-4.859 4.925 0 2.672 1.904 4.906 4.878 4.906 2.192 0 3.965-1.21 4.593-3.144h-1.487c-.476 1.08-1.638 1.782-3.05 1.782-1.924 0-3.315-1.345-3.43-3.052h8.14c.17-3.108-1.812-5.417-4.785-5.417m-.038 1.36c1.772 0 3.05 1.158 3.297 2.789h-6.576c.21-1.592 1.506-2.788 3.279-2.788m11.97-1.114c-1.543 0-2.647 1.022-2.647 2.442 0 1.138.78 2.142 2.057 2.408l3.966.873c.592.13.935.548.935 1.098 0 .702-.515 1.137-1.221 1.137h-5.394v1.382h5.413c1.582 0 2.686-1.06 2.686-2.52 0-1.212-.78-2.16-2.094-2.463l-3.967-.873a1.07 1.07 0 0 1-.877-1.06c0-.645.457-1.062 1.163-1.062h5.128v-1.362zm17.384 0H78.42v-3.354h-1.427v3.354h-1.715v1.362h1.715v5.781c0 1.421.78 2.197 2.228 2.197H82.9v-1.382h-3.43c-.687 0-1.049-.378-1.049-1.041v-5.555h4.48zm12.641 1.665h-.057c-.705-1.117-2.003-1.893-3.662-1.91C89 72.081 87 74.163 87 77.006s2.038 4.945 4.802 4.925c1.697-.018 2.956-.832 3.681-1.987h.057v1.742h1.408v-9.34H95.54zm-3.528 6.558c-2.174 0-3.585-1.611-3.585-3.563s1.411-3.545 3.585-3.545c2.117 0 3.528 1.593 3.528 3.545 0 1.934-1.412 3.563-3.528 3.563m10.541-3.013c0 2.654 1.771 4.395 4.366 4.395 2.592 0 4.363-1.74 4.363-4.395v-5.21h-1.427v5.172c0 1.801-1.183 3.072-2.936 3.072-1.735 0-2.937-1.27-2.937-3.072v-5.172h-1.429zm19.08-5.21c-1.582 0-2.727.624-3.261 1.855h-.056v-1.855h-1.39v9.34h1.428v-4.454c0-2.235 1.277-3.468 3.221-3.468h1.715v-1.418zm13.917 1.665h-.058c-.706-1.117-2.003-1.893-3.662-1.91-2.821-.02-4.82 2.062-4.82 4.905s2.038 4.945 4.803 4.925c1.697-.018 2.955-.832 3.679-1.987h.058v1.742h1.407v-9.34h-1.407zm-3.528 6.558c-2.174 0-3.585-1.611-3.585-3.563s1.411-3.545 3.585-3.545c2.116 0 3.528 1.593 3.528 3.545 0 1.934-1.412 3.563-3.528 3.563m15.763-8.469c-1.505 0-2.764.737-3.49 1.873h-.038v-1.627h-1.408v9.34h1.429v-4.661c0-2.047 1.353-3.544 3.241-3.544 1.715 0 2.784 1.231 2.784 3.012v5.193h1.427v-5.44c0-2.538-1.598-4.146-3.945-4.146m16.088.246h-4.481v-3.354h-1.426v3.354h-1.717v1.362h1.717v5.781c0 1.421.78 2.197 2.228 2.197h3.679v-1.382h-3.432c-.686 0-1.049-.378-1.049-1.041v-5.555h4.481z"></path><defs><linearGradient id="logo_svg__a" x1="1.083" x2="200.909" y1="58.993" y2="51.624" gradientUnits="userSpaceOnUse"><stop stop-color="#F15A2E"></stop><stop offset="1" stop-color="#ED0488"></stop></linearGradient></defs></svg>
+                <h1 class="animatable">Ваши клиенты ищут Вас в интернете</h1>
+                <h2 class="animatable">Но находят КОНКУРЕНТОВ</h2>
+                <p class="animatable">Каждый день жители Екатеринбурга делают тысячи запросов <span class="search-query-inline"><i class="fas fa-search"></i>Ресторан</span> <span class="search-query-inline"><i class="fas fa-search"></i>Бизнес ланч</span> <span class="search-query-inline"><i class="fas fa-search"></i>Где поесть</span></p>
+                <p class="animatable">Ваши 7 ресторанов МАМА должны быть первыми в результатах!</p>
+                <a href="#slide-contact" class="cta-button animatable">Хочу быть первым в поиске!</a>
             </div>
         </section>
 
@@ -636,35 +1105,35 @@
             <div class="container">
                 <div class="problem-grid">
                     <div class="problem-text">
-                        <h2 class="animatable">Сейчас вы теряете клиентов</h2>
+                        <h2 class="animatable">Сейчас Вы теряете клиентов</h2>
                         <p class="problem-description animatable">
-                            Пока вы не рекламируетесь в поиске, ваши конкуренты получают ваших потенциальных клиентов. 
-                            Каждый день мимо вас проходят сотни голодных людей с деньгами.
+                            Пока Вы не рекламируетесь в поиске, Ваши конкуренты получают Ваших потенциальных клиентов. 
+                            Каждый день мимо Вас проходят сотни голодных людей с деньгами.
                         </p>
                         <p class="problem-details animatable">
-                            У вас 8 ресторанов в разных районах города, но люди о них не знают, 
-                            потому что не видят вас в поиске.
+                            У Вас 7 ресторанов в разных районах города, но люди о них не знают, 
+                            потому что не видят Вас в поиске.
                         </p>
                     </div>
                     <div class="problem-stats">
                         <div class="stat-item animatable">
                             <div class="stat-number">2000+</div>
                             <div class="stat-text">
-                                <strong>запросов в день</strong>
-                                "ресторан Екатеринбург" в Яндексе
+                                <strong>Запросов в день</strong>
+                                «Ресторан Екатеринбург» в Яндексе
                             </div>
                         </div>
                         <div class="stat-item animatable">
                             <div class="stat-number">500+</div>
                             <div class="stat-text">
-                                <strong>запросов в день</strong>
-                                "бизнес ланч" в вашем городе
+                                <strong>Запросов в день</strong>
+                                «Бизнес ланч» в вашем городе
                             </div>
                         </div>
                         <div class="stat-item animatable">
                             <div class="stat-number">0</div>
                             <div class="stat-text">
-                                <strong>ваша позиция</strong>
+                                <strong>Ваша позиция</strong>
                                 в рекламных результатах
                             </div>
                         </div>
@@ -676,51 +1145,86 @@
         <!-- Video Section -->
         <section class="slide video-section" id="slide-video" data-slidename="video">
             <div class="container">
-                <h2 class="animatable">Смотрите сами: вас нет в поиске!</h2>
+                <h2 class="animatable">Смотрите сами: Вас нет в поиске!</h2>
                 <p class="video-subtitle animatable">
-                    Мы проверили запрос "ресторан екатеринбург" — ваших карточек нет даже в обычных результатах
+                    Мы проверили запрос «Ресторан Екатеринбург» — Ваших карточек нет даже в обычных результатах
                 </p>
-                <div class="video-placeholder animatable">
-                    <div class="play-button"></div>
+                <div class="video-wrapper animatable">
+                    <iframe src="https://kinescope.io/embed/cAggAVgwAZ22dP8mLQryfy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" allowfullscreen></iframe>
                 </div>
                 <p class="video-caption animatable">
-                    * Видео показывает реальные результаты поиска по запросу "ресторан екатеринбург"
+                    * Видео показывает реальные результаты поиска по запросу «Ресторан Екатеринбург»
                 </p>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="slide gallery" id="slide-gallery" data-slidename="gallery">
+            <div class="container">
+                <h2 class="animatable">Ваши рестораны заслуживают быть первыми</h2>
+                <p class="gallery-subtitle animatable">Средний расчет стоимости Вашей рекламы</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item animatable">
+                        <img src="img/img (1).png" alt="Скриншот расчета стоимости рекламы 1">
+                    </div>
+                    <div class="gallery-item animatable">
+                        <img src="img/img (2).png" alt="Скриншот расчета стоимости рекламы 2">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section 2 -->
+        <section class="slide gallery" id="slide-gallery-2" data-slidename="gallery-2">
+            <div class="container">
+                <h2 class="animatable">Варианты отображения рекламы</h2>
+                 <p class="gallery-subtitle animatable">Вот как могут выглядеть Ваши объявления в поиске и на картах</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item animatable"><img src="img/img (3).png" alt="Пример рекламы 1"></div>
+                    <div class="gallery-item animatable"><img src="img/img (4).png" alt="Пример рекламы 2"></div>
+                    <div class="gallery-item animatable"><img src="img/img (5).png" alt="Пример рекламы 3"></div>
+                    <div class="gallery-item animatable"><img src="img/img(6).png" alt="Пример рекламы 4"></div>
+                    <div class="gallery-item animatable"><img src="img/img(7).png" alt="Пример рекламы 5"></div>
+                    <div class="gallery-item animatable"><img src="img/img(8).png" alt="Пример рекламы 6"></div>
+                </div>
             </div>
         </section>
 
         <!-- Examples Section -->
         <section class="slide examples" id="slide-examples" data-slidename="examples">
             <div class="container">
-                <h2 class="animatable">Даже АВТО.РУ рекламируется по запросу "бизнес ланч"!</h2>
-                <p class="examples-intro animatable"> 
-                    Если гиганты рынка считают нужным рекламироваться, почему вы этого не делаете?
+                <h2 class="animatable">Даже АВТО.РУ рекламируется по запросу «Бизнес ланч»!</h2>
+                <p class="examples-intro animatable">
+                    Если гиганты рынка считают нужным рекламироваться, почему Вы этого не делаете?
                 </p>
                 
-                <div class="search-query animatable">Поиск: "бизнес ланч екатеринбург"</div>
+                <div class="search-query animatable">
+                    <i class="fas fa-search"></i>
+                    Поиск: «Бизнес ланч Екатеринбург»
+                </div>
                 
                 <div class="ad-example animatable">
-                    <div class="ad-title">Авто.ру — Купить авто с пробегом</div>
+                    <a href="#" class="ad-title">Авто.ру — Гастрономический гид по Екатеринбургу</a>
                     <div class="ad-url">auto.ru</div>
-                    <div class="ad-description">
-                        Объявления от автосалонов и частных лиц. Honest price™ — справедливая цена авто на Авто.ру!
-                    </div>
+                    <p class="ad-description">
+                        Гастрономический гид по Екатеринбургу. Знакомимся с особенностями Уральской кухни...
+                    </p>
                 </div>
                 
                 <div class="ad-example animatable">
-                    <div class="ad-title">Суши Master — Доставка суши и роллов</div>
+                    <a href="#" class="ad-title">Суши Master — Доставка суши и роллов</a>
                     <div class="ad-url">sushi-master.ru</div>
-                    <div class="ad-description">
+                    <p class="ad-description">
                         Быстрая доставка суши. Бизнес-ланчи от 290₽. Закажите онлайн с доставкой на дом!
-                    </div>
+                    </p>
                 </div>
                 
                 <div class="ad-example animatable">
-                    <div class="ad-title">Додо Пицца — Бизнес-ланч в офис</div>
+                    <a href="#" class="ad-title">Додо Пицца — Бизнес-ланч в офис</a>
                     <div class="ad-url">dodopizza.ru</div>
-                    <div class="ad-description">
+                    <p class="ad-description">
                         Горячая пицца и паста для бизнес-ланча. Доставка в офис за 30 минут. От 350₽.
-                    </div>
+                    </p>
                 </div>
                 
                 <p class="examples-outro animatable">
@@ -732,7 +1236,7 @@
         <!-- Benefits Section -->
         <section class="slide benefits" id="slide-benefits" data-slidename="benefits">
             <div class="container">
-                <h2 class="animatable">Что даст вам реклама в поиске</h2>
+                <h2 class="animatable">Что даст Вам реклама в поиске</h2>
                 <div class="benefits-grid">
                     <div class="benefit-card animatable">
                         <div class="benefit-icon">📈</div>
@@ -757,7 +1261,7 @@
                     <div class="benefit-card animatable">
                         <div class="benefit-icon">⚡</div>
                         <h3>Быстрый результат</h3>
-                        <p>Уже через неделю вы увидите первых клиентов из рекламы</p>
+                        <p>Уже через неделю Вы увидите первых клиентов из рекламы</p>
                     </div>
                     <div class="benefit-card animatable">
                         <div class="benefit-icon">🔄</div>
@@ -773,53 +1277,107 @@
             <div class="container">
                 <h2 class="animatable">Сколько это стоит?</h2>
                 <p class="pricing-intro animatable">
-                    Даже самый дешевый таргетолог на hh.ru стоит 80-120 тысяч в месяц
+                    Выберите подходящий вариант обслуживания:
                 </p>
-                <div class="price-card animatable">
-                    <div class="price">30 000₽</div>
-                    <div class="price-period">в месяц за всё</div>
-                    <ul class="price-features">
-                        <li>Настройка рекламы в Яндексе и Google</li>
-                        <li>Создание всех объявлений</li>
-                        <li>Настройка для всех 8 ресторанов</li>
-                        <li>Ежедневный мониторинг и оптимизация</li>
-                        <li>Еженедельные отчеты с цифрами</li>
-                        <li>Корректировка стратегии каждый месяц</li>
-                        <li>Техническая поддержка 24/7</li>
-                    </ul>
-                    <p class="price-note">
-                        * Рекламный бюджет оплачиваете отдельно напрямую в Яндекс и Google
-                    </p>
-                    <a href="#slide-contact" class="cta-button">Начать работу</a>
+                <div class="pricing-cards">
+                    <div class="price-card animatable">
+                        <div>
+                            <div class="price">20 000₽</div>
+                            <div class="price-period">в месяц за один ресторан</div>
+                        </div>
+                        <ul class="price-features">
+                            <li>Настройка рекламы в Яндексе</li>
+                            <li>Создание всех объявлений</li>
+                            <li>Ежедневный мониторинг и оптимизация</li>
+                            <li>Еженедельные отчёты с цифрами</li>
+                            <li>Корректировка стратегии каждый месяц</li>
+                            <li>Техническая поддержка 24/7</li>
+                            <li>Настройка и запуск рекламных кампаний</li>
+                            <li>Проработка семантического ядра</li>
+                            <li>Настройка Ретаргетинга</li>
+                            <li>Ведение карточек в Яндекс Бизнес</li>
+                            <li>Гарантия увеличения потока гостей по договору</li>
+                            <li>Создание креативов, подбор аудиторий и площадок</li>
+                            <li>Настройка и запуск рекламных кампаний в Телеграмм</li>
+                            <li>Настройка UTM-меток и сквозной аналитики</li>
+                            <li>Заполнение всех расширений для максимальной видимости</li>
+                            <li>Необходимое количество правок в кампаниях</li>
+                            <li>Пошаговый план работ после бесплатной консультации</li>
+                        </ul>
+                        <div>
+                            <p class="price-note">
+                                * Рекламный бюджет оплачивается отдельно напрямую в Яндекс
+                            </p>
+                            <a href="#slide-contact" class="cta-button">Начать с одного ресторана</a>
+                        </div>
+                    </div>
+                    <div class="price-card animatable">
+                        <div>
+                            <div class="price">100 000₽</div>
+                            <div class="price-period">в месяц за всю сеть</div>
+                        </div>
+                        <ul class="price-features">
+                            <li>Настройка рекламы в Яндексе</li>
+                            <li>Создание всех объявлений</li>
+                            <li>Ежедневный мониторинг и оптимизация</li>
+                            <li>Еженедельные отчёты с цифрами</li>
+                            <li>Корректировка стратегии каждый месяц</li>
+                            <li>Техническая поддержка 24/7</li>
+                            <li>Настройка и запуск рекламных кампаний</li>
+                            <li>Проработка семантического ядра</li>
+                            <li>Настройка Ретаргетинга</li>
+                            <li>Ведение карточек в Яндекс Бизнес</li>
+                            <li>Гарантия увеличения потока гостей по договору</li>
+                            <li>Создание креативов, подбор аудиторий и площадок</li>
+                            <li>Настройка и запуск рекламных кампаний в Телеграмм</li>
+                            <li>Настройка UTM-меток и сквозной аналитики</li>
+                            <li>Заполнение всех расширений для максимальной видимости</li>
+                            <li>Необходимое количество правок в кампаниях</li>
+                            <li>Пошаговый план работ после бесплатной консультации</li>
+                        </ul>
+                        <div>
+                            <p class="price-note">
+                                * Рекламный бюджет оплачивается отдельно напрямую в Яндекс
+                            </p>
+                            <a href="#slide-contact" class="cta-button">Продвигать всю сеть</a>
+                        </div>
+                    </div>
                 </div>
-                <p class="pricing-comparison animatable">
-                    <strong>Сравните:</strong> один штатный маркетолог = 100 000₽/мес + соцвзносы<br>
-                    <strong>Мы:</strong> 30 000₽/мес за команду экспертов
-                </p>
             </div>
         </section>
 
         <!-- Footer CTA -->
         <section class="slide footer-cta" id="slide-contact" data-slidename="contact"> 
             <div class="container">
-                <h2 class="animatable">Хватит кормить чужих клиентов!</h2>
+                <h2 class="animatable">Хватит кормить конкурентов!</h2>
                 <p class="footer-cta-description animatable">
-                    Пока вы думаете, ваши конкуренты получают клиентов из поиска. 
-                    Давайте изменим ситуацию уже на следующей неделе.
+                    Пока Вы думаете, другие получают Ваших клиентов из поиска. 
+                    Давайте изменим эту ситуацию уже на следующей неделе.
                 </p>
-                <a href="tel:+79123456789" class="cta-button animatable">Позвонить прямо сейчас</a>
+                <a href="tel:+79222208168" class="cta-button animatable">Позвонить прямо сейчас</a>
                 <div class="contact-info animatable">
-                    <p><strong>Александр Иванов</strong><br>
-                    Специалист по рекламе в поиске</p>
-                    <p>📞 +7 (912) 345-67-89<br>
-                    📧 reklama@expert.ru</p>
+                    <p><strong>Михаил Свежов</strong><br>
+                    Специалист по рекламе</p>
+                    <p>📞 +7 (922) 220-81-68<br>
+                    📧 mihailsvezhov@gmail.com</p>
                     <p class="contact-closing">
-                        Звоните с 9:00 до 21:00, отвечаем всегда
+                        Звоните!
                     </p>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Popup для изображений -->
+    <div id="imagePopup" class="image-popup">
+        <div class="popup-overlay"></div>
+        <div class="popup-content">
+            <span class="popup-close">×</span>
+            <button class="popup-nav popup-prev"><</button>
+            <img id="popupImage" src="" alt="Увеличенное изображение">
+            <button class="popup-nav popup-next">></button>
+        </div>
+    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -829,89 +1387,113 @@
         let currentSlideIndex = 0;
         const animatableElementsRegistry = new WeakMap(); 
 
+        const popup = document.getElementById('imagePopup');
+        const popupImg = document.getElementById('popupImage');
+        const closeBtn = document.querySelector('.popup-close');
+        const prevBtn = document.querySelector('.popup-prev');
+        const nextBtn = document.querySelector('.popup-next');
+        let currentImageIndex = 0;
+        let currentGalleryImages = [];
+
+        function openPopup(imgElement) {
+            const gallery = imgElement.closest('.gallery-grid');
+            currentGalleryImages = Array.from(gallery.querySelectorAll('img')).map(img => img.src);
+            currentImageIndex = currentGalleryImages.indexOf(imgElement.src);
+            
+            updatePopupImage();
+            popup.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function updatePopupImage() {
+            if(currentGalleryImages.length === 0) return;
+            popupImg.src = currentGalleryImages[currentImageIndex];
+            prevBtn.style.display = currentGalleryImages.length > 1 ? 'flex' : 'none';
+            nextBtn.style.display = currentGalleryImages.length > 1 ? 'flex' : 'none';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            document.body.style.overflow = '';
+            currentGalleryImages = [];
+        }
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', (e) => openPopup(e.currentTarget.querySelector('img')));
+        });
+
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length; updatePopupImage(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length; updatePopupImage(); });
+        closeBtn.addEventListener('click', closePopup);
+        popup.querySelector('.popup-overlay').addEventListener('click', closePopup);
+        document.addEventListener('keydown', (e) => {
+            if (popup.style.display !== 'block') return;
+            if (e.key === 'Escape') closePopup();
+            if (currentGalleryImages.length > 1) {
+                if (e.key === 'ArrowLeft') { prevBtn.click(); }
+                if (e.key === 'ArrowRight') { nextBtn.click(); }
+            }
+        });
+
         function createDots() {
-            dotNavContainer.innerHTML = ''; // Очищаем на случай resize или повторного вызова
+            if (!dotNavContainer) return;
+            dotNavContainer.innerHTML = '';
             slides.forEach((slide, index) => {
                 const dot = document.createElement('a');
                 dot.href = `#${slide.id}`;
                 dot.setAttribute('aria-label', `Перейти к слайду ${slide.dataset.slidename || index + 1}`);
                 dot.dataset.index = index;
-                if (index === 0) {
-                    dot.classList.add('active-dot');
-                }
                 dot.addEventListener('click', (e) => {
                     e.preventDefault();
-                    scrollToSlide(index);
+                    slides[index]?.scrollIntoView({ behavior: 'smooth' });
                 });
                 dotNavContainer.appendChild(dot);
             });
         }
-        createDots(); // Создаем точки при загрузке
-        
-        const dots = Array.from(dotNavContainer.querySelectorAll('a')); // Получаем созданные точки
+        createDots();
+        const dots = dotNavContainer ? Array.from(dotNavContainer.querySelectorAll('a')) : [];
 
-        function scrollToSlide(index) {
-            if (slides[index]) {
-                slides[index].scrollIntoView({ behavior: 'smooth' });
-            }
+        function updateActiveDot(index) {
+            dots.forEach((dot, i) => dot.classList.toggle('active-dot', i === index));
         }
-        
-        document.querySelectorAll('a.cta-button[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSlideIndex = slides.findIndex(s => s.id === targetId);
-                if (targetSlideIndex !== -1) {
-                    scrollToSlide(targetSlideIndex);
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                const slide = entry.target;
+                if (entry.isIntersecting) {
+                    const slideIndex = slides.indexOf(slide);
+                    if (slideIndex > -1) {
+                        updateActiveDot(slideIndex);
+                    }
+                    slide.querySelectorAll('.animatable').forEach(el => {
+                        el.classList.add('animated');
+                    });
+                } else {
+                    // Optional: Reset animation when scrolling away
+                    // slide.querySelectorAll('.animatable').forEach(el => {
+                    //     el.classList.remove('animated');
+                    // });
                 }
             });
-        });
-
-        const slideObserverOptions = {
-            root: mainContainer, 
-            threshold: 0.6, 
         };
 
-        const slideObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const slideIndex = slides.indexOf(entry.target);
-                    if (slideIndex === -1) return;
-
-                    currentSlideIndex = slideIndex;
-
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('active-dot', index === currentSlideIndex);
-                    });
-                    
-                    slides.forEach(s => s.classList.remove('current-active-slide'));
-                    entry.target.classList.add('current-active-slide');
-
-                    const animatables = entry.target.querySelectorAll('.animatable');
-                    animatables.forEach(el => {
-                        if (!animatableElementsRegistry.has(el) || animatableElementsRegistry.get(el) !== entry.target) {
-                            el.classList.add('animated');
-                            animatableElementsRegistry.set(el, entry.target); 
-                        }
-                    });
-                } 
-            });
-        }, slideObserverOptions);
-
-        slides.forEach(slide => {
-            slideObserver.observe(slide);
+        const slideObserver = new IntersectionObserver(observerCallback, {
+            root: mainContainer.matches(':fullscreen') ? mainContainer : null,
+            threshold: 0.5,
         });
-        
-        if (slides.length > 0 && slides[0].getBoundingClientRect().top >= 0 && slides[0].getBoundingClientRect().top < window.innerHeight) {
-           const firstSlideAnimatables = slides[0].querySelectorAll('.animatable');
-           firstSlideAnimatables.forEach(el => {
-                 if (!animatableElementsRegistry.has(el) || animatableElementsRegistry.get(el) !== slides[0]) {
-                    el.classList.add('animated');
-                    animatableElementsRegistry.set(el, slides[0]);
-                }
+
+        slides.forEach(slide => slideObserver.observe(slide));
+
+        // Smooth scroll for CTA buttons
+        document.querySelectorAll('a.cta-button[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId)?.scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
-             if(dots.length > 0) dots[0].classList.add('active-dot');
-        }
+        });
     });
     </script>
 </body>
